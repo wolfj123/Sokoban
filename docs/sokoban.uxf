@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>924</x>
+      <y>385</y>
+      <w>462</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>Model : Class
+--
+- _levelLoader : LevelLoader
+- _levelGrid : Cell [][]
+--
++ KeyPress (enum key) : boolean //wolf  // returns if a move was made
+- CheckMoveLegality : boolean // wolf
++ LoadNewLevel (level bn number) // reset // ariel </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>385</x>
+      <y>308</y>
+      <w>462</w>
+      <h>462</h>
+    </coordinates>
+    <panel_attributes>MainWindow: Class extends JFrame
+--
+- _resetButton : JButton
+- _scoreLabel : JLabel
+- _levelsPicker : listScrollPane
+
+--
+**builder - initialize listner to button, listscroll listner ,grid keypress
++ SetWindowSize (int x,int y) : void //ariel    // set layouts
+- SetUpperLayout () // sets the buttons and scroll pane
+- SetLowerLayout () // sets the gird layout
++ UpdateScore (int score) : void //wolf
++ UpdateBoard (Cell [] [] board) : void // ariel updates the board
+
+
+-// 
+divide into two vertical layouts
+bottom will contain grid of pictures
+upper:
+ -   split horizontal
+	- left - listScrollPane
+	- right : resetbutton+Score</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>473</x>
+      <y>0</y>
+      <w>528</w>
+      <h>187</h>
+    </coordinates>
+    <panel_attributes>Contr	oller: Class 
+implements actionlistner (mouse) &amp; keyListner
+--
+- _score : int
+--
++ LevelSelected: void //ariel  calls new level with the new level
++ KeyPressed : void // wolf if key is arrow cllal buttonPress and update score
++ NewLevel : void // ariel
+- // LoadNewLevel + SetWindowSize + updateScore (0) + updateBoard</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>924</x>
+      <y>671</y>
+      <w>231</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>LevelLoader: class
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1155</x>
+      <y>671</y>
+      <w>231</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>Cell: class
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>627</x>
+      <y>209</y>
+      <w>231</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>Keyboard listner // wolf
+--
+actionPerformed</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>385</x>
+      <y>209</y>
+      <w>231</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>buttons listner // ariel
+--
+actionPerformed</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>869</x>
+      <y>209</y>
+      <w>231</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>Listlistner // ariel
+--
+actionPerformed</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>297</y>
+      <w>352</w>
+      <h>341</h>
+    </coordinates>
+    <panel_attributes>GameBoard : Class // ariel
+--
+- _pictures : ImageIcon [] // differnet icons
+- _gameBoard : ImageIcon [][] // the gameboard
+--
++ UpdateBoard (Cell [] [] board) : void // updates the bo
+// change the pictures array to relevant pictures
+- SetWall : void
+- SetPlayer : void
+- SetFloor : void
+- SetCrate : void
+_ SetCrateInPosition: void</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
