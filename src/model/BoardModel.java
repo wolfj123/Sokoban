@@ -2,6 +2,7 @@ package model;
 import java.io.IOException;
 
 import levelLoader.*;
+import model.EnumCell.CellType;
 import model.EnumDirection.Direction;
 
 public class BoardModel {
@@ -37,6 +38,13 @@ public class BoardModel {
 		
 	}
 	
+	private void loadNewLevel(int levelNumber){
+		//TODO: ariel
+		//I am pretty sure you can just write here the loading code in the builder and have the 
+		//builder use this method
+	}
+	
+	
 	private boolean checkLegality(Direction direction){
 		//TODO: Jonathan
 		return false;
@@ -47,18 +55,74 @@ public class BoardModel {
 	private int[] getPlayerCoords(){
 		int[] output = new int[2];
 		
-		
-		
+		boolean foundPlayer = false;
+
 		return null;
 	}
 	
-	
-	
-	
-	private void loadNewLevel(int levelNumber){
-		//TODO: ariel
-		//I am pretty sure you can just write here the loading code in the builder and have the 
-		//builder use this method
+	private Cell getPlayerCell(){
+		int[] output = new int[2];
+
+		for(Cell[] cellColumn: _levelGrid){
+			for (Cell cell : cellColumn){
+				if(cell.hasPlayer())
+					return cell;
+			}
+		}
+		return null;
 	}
+		
+	
+	private boolean checkVictory(){
+		//TODO
+		return false;
+	}
+
+	
+	//return next X,Y coordinates based on direction
+	private int[] nextCoords(int[] coords, Direction direction){
+		int[] output = new int[2];
+		
+		switch(direction){
+		
+		case UP:
+			output[0] = coords[0];
+			output[1] = coords[1]-1;
+			break;
+		
+		case DOWN:
+			output[0] = coords[0];
+			output[1] = coords[1]+1;
+			break;
+		
+		case LEFT:
+			output[0] = coords[0]-1;
+			output[1] = coords[1];
+			break;
+		
+		case RIGHT:
+			output[0] = coords[0]+1;
+			output[1] = coords[1];
+			break;
+		}	
+		return output;	
+	}
+	
+	
+	/*
+	private CellType getCellTypeByCoords(int[] coords){
+		if(coords[0]<0 | coords[1]<0 | coords[0]>=_levelGrid.length 
+				| coords[1]>=_levelGrid[0].length)
+			return CellType.WALL;
+		
+		Cell cell = _levelGrid[coords[0]][coords[1]];
+		
+		if(cell.hasPlayer())
+			return CellType.PLAYER;
+		
+	}
+	*/
+	
+	
 	
 }
