@@ -58,12 +58,25 @@ public class BoardModel {
 	
 	
 	private boolean checkLegality(Direction direction){
-		//TODO: Jonathan
+		Cell player = getPlayerCell();
+		Cell nextCell = getNextCell(player, direction);
+		Cell nextNextCell = getNextCell(nextCell, direction);
 		
+		if(nextCell==null)
+			return false;
 		
+		if(nextCell.isEmptyFloor())
+			return true;
+		
+		if(nextNextCell!=null && nextCell.hasBox() & nextNextCell.isEmptyFloor())
+			return true;
 		
 		
 		return false;
+		
+		//TODO: might need to use duplicate code in the makeMove method which implies that 
+		//this method is unnecessary
+
 	}
 	
 	private boolean checkVictory(){
@@ -75,8 +88,6 @@ public class BoardModel {
 	}
 	
 	private Cell getPlayerCell(){
-		int[] output = new int[2];
-
 		for(Cell[] cellColumn: _levelGrid){
 			for (Cell cell : cellColumn){
 				if(cell.hasPlayer())
