@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.util.Vector;
 
 import levelLoader.*;
-import model.EnumCell.CellType;
 import model.EnumDirection.Direction;
 
 public class BoardModel {
@@ -54,6 +53,14 @@ public class BoardModel {
 		//TODO: ariel
 		//I am pretty sure you can just write here the loading code in the builder and have the 
 		//builder use this method
+	}
+	
+	
+	
+	public Cell[][] makeMove(Direction direction){
+		//TODO: NOT FINISHED!!
+		
+		return _levelGrid;
 	}
 	
 	
