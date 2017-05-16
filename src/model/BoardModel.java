@@ -1,5 +1,6 @@
 package model;
 import java.io.IOException;
+import java.util.Vector;
 
 import levelLoader.*;
 import model.EnumCell.CellType;
@@ -9,6 +10,7 @@ public class BoardModel {
 	
 	private LevelLoader _levelLoader = new LevelLoader();
 	private Cell[][] _levelGrid;
+	private Vector<Cell> _storageVector;
 	
 	public BoardModel(){
 		//TODO: get level integer and try to load level
@@ -26,15 +28,25 @@ public class BoardModel {
 		try {
 			_levelLoader.load(levelsFile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		if(levelNumber<0 | levelNumber>_levelLoader.getLevelsCount()-1)
 			throw new IllegalArgumentException("Level does not exist");
 		
+		//TODO: maybe throw an exception if the width is 0 ? it might mess up the getNextCell
 		_levelGrid = _levelLoader.get(levelNumber);
+		_storageVector = new Vector<>();
+		
+		
+		//initialize the storage list
+		for(Cell[] cellColumn: _levelGrid){
+			for (Cell cell : cellColumn){
+				if(cell.isStorage())
+					_storageVector.add(cell);
+			}
+		}
+		
 		
 	}
 	
@@ -47,17 +59,19 @@ public class BoardModel {
 	
 	private boolean checkLegality(Direction direction){
 		//TODO: Jonathan
+		
+		
+		
+		
 		return false;
 	}
 	
-	
-	//get X,Y coordinates of the player
-	private int[] getPlayerCoords(){
-		int[] output = new int[2];
-		
-		boolean foundPlayer = false;
-
-		return null;
+	private boolean checkVictory(){
+		for(Cell storage : _storageVector){
+			if(!storage.hasBox())
+				return false;
+		}
+		return true;
 	}
 	
 	private Cell getPlayerCell(){
@@ -73,56 +87,42 @@ public class BoardModel {
 	}
 		
 	
-	private boolean checkVictory(){
-		//TODO
-		return false;
-	}
-
-	
 	//return next X,Y coordinates based on direction
-	private int[] nextCoords(int[] coords, Direction direction){
-		int[] output = new int[2];
+	private Cell getNextCell(Cell cell, Direction direction){
+		int x = cell._x;
+		int y = cell._y;
+		
+		int nextX = x;
+		int nextY = y;
 		
 		switch(direction){
 		
 		case UP:
-			output[0] = coords[0];
-			output[1] = coords[1]-1;
+			nextY -= 1;
 			break;
 		
 		case DOWN:
-			output[0] = coords[0];
-			output[1] = coords[1]+1;
+			nextY += 1;
 			break;
 		
 		case LEFT:
-			output[0] = coords[0]-1;
-			output[1] = coords[1];
+			nextX -= 1;
 			break;
 		
 		case RIGHT:
-			output[0] = coords[0]+1;
-			output[1] = coords[1];
+			nextX += 1;
 			break;
 		}	
-		return output;	
+
+		if(nextX<0 | nextX>=_levelGrid.length |
+				nextY<0 | nextY>=_levelGrid[0].length)
+			return null;
+		
+		return _levelGrid[nextX][nextY];
 	}
 	
 	
-	/*
-	private CellType getCellTypeByCoords(int[] coords){
-		if(coords[0]<0 | coords[1]<0 | coords[0]>=_levelGrid.length 
-				| coords[1]>=_levelGrid[0].length)
-			return CellType.WALL;
-		
-		Cell cell = _levelGrid[coords[0]][coords[1]];
-		
-		if(cell.hasPlayer())
-			return CellType.PLAYER;
-		
-	}
-	*/
-	
+
 	
 	
 }
