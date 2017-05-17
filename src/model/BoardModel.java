@@ -13,12 +13,10 @@ public class BoardModel {
 	
 	public BoardModel(){
 		this(0);
-		
 	}
 	
 	public BoardModel(int levelNumber){
 		this(levelNumber, "levels");
-		
 	}
 	
 	public BoardModel(int levelNumber, String levelsFile){
@@ -57,8 +55,8 @@ public class BoardModel {
     /**
      * Loads all the levels to the internal levels buffer
      * @param direction - the direction the player wishes to go
-     * @return Cell[][] represeting the new 
-     * @throws IOException 
+     * @return Cell[][] representing the new 
+     * @throws RuntimeException if the move is illegal
      */
 	public Cell[][] makeMove(Direction direction){
 		//TODO: NOT FINISHED!!
@@ -67,9 +65,9 @@ public class BoardModel {
 		Cell nextCell = getNextCell(player, direction);
 		Cell nextNextCell = getNextCell(nextCell, direction);
 		
-		if(nextCell==null){
-			return _levelGrid;
-		}
+		if(!checkLegality(direction)){
+			throw new RuntimeException("Illegal move");
+			}
 
 		//move to next empty cell
 		if(nextCell.isEmptyFloor()){
@@ -88,8 +86,6 @@ public class BoardModel {
 	}
 	
 	
-	
-	/*
 	private boolean checkLegality(Direction direction){
 		Cell player = getPlayerCell();
 		Cell nextCell = getNextCell(player, direction);
@@ -106,13 +102,8 @@ public class BoardModel {
 		
 		
 		return false;
-		
-		//might need to use duplicate code in the makeMove method which implies that 
-		//this method is unnecessary
 
 	}
-	
-	*/
 	
 	private boolean checkVictory(){
 		for(Cell storage : _storageVector){
@@ -133,7 +124,7 @@ public class BoardModel {
 	}
 		
 	
-	//return next X,Y coordinates based on direction
+	//return next Cell based on direction
 	private Cell getNextCell(Cell cell, Direction direction){
 		int x = cell._x;
 		int y = cell._y;
