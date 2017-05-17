@@ -15,7 +15,7 @@ public class ArrowController implements KeyListener{
 		Direction direction = Direction.NONE; 
 		int key = e.getKeyCode();
 		
-		switch(key){
+		switch(key){ 
 		
 		case KeyEvent.VK_UP:
 			direction = Direction.UP;
