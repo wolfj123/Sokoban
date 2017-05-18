@@ -31,10 +31,22 @@ public class ArrowController implements KeyListener{
 		}
 		
 		if(direction!=Direction.NONE){
-			_board.makeMove(direction);
+			
+			try{
+				_board.makeMove(direction);
+			}
+			catch(Exception ex){
+				//TODO: maybe indicate to user that the move is wrong with annoying sound?
+			}
 		}
 		
 		// TODO View.drawBoard()
+		
+		boolean victory = _board.checkVictory();
+		if(victory){
+			//TODO make player win	
+		}
+		
 	}
 
 	@Override
