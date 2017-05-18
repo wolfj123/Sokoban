@@ -56,7 +56,7 @@ public class BoardModel {
      * Loads all the levels to the internal levels buffer
      * @param direction - the direction the player wishes to go
      * @return Cell[][] representing the new 
-     * @throws RuntimeException if the move is illegal
+     * @throws UnsupportedOperationException if the move is illegal
      */
 	public Cell[][] makeMove(Direction direction){
 		//TODO: NOT FINISHED!!
@@ -65,21 +65,32 @@ public class BoardModel {
 		Cell nextCell = getNextCell(player, direction);
 		Cell nextNextCell = getNextCell(nextCell, direction);
 		
+		/*
 		if(!checkLegality(direction)){
 			throw new RuntimeException("Illegal move");
-			}
+			}*/
+		
+		
+		boolean isLegal = false;
 
 		//move to next empty cell
 		if(nextCell.isEmptyFloor()){
+			isLegal = true;
 			player.set_hasPlayer(false);
 			nextCell.set_hasPlayer(true);
 		}
 
 		//move player and box to next cells
 		if(nextNextCell!=null && nextCell.hasBox() & nextNextCell.isEmptyFloor()){
+			isLegal = true;
 			player.set_hasPlayer(false);
 			nextCell.set_hasPlayer(true); nextCell.set_hasBox(false);
 			nextNextCell.set_hasBox(true);
+		}
+		
+		
+		if(!isLegal){
+			throw new UnsupportedOperationException("Illegal move!");
 		}
 		
 		return _levelGrid;
@@ -105,7 +116,7 @@ public class BoardModel {
 
 	}
 	
-	private boolean checkVictory(){
+	public boolean checkVictory(){
 		for(Cell storage : _storageVector){
 			if(!storage.hasBox())
 				return false;
