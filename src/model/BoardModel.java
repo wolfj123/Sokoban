@@ -26,6 +26,12 @@ public class BoardModel {
 			e.printStackTrace();
 		}
 		
+		loadNewLevel(levelNumber);
+		
+		
+	}
+	
+	private void loadNewLevel(int levelNumber){
 		if(levelNumber<0 | levelNumber>_levelLoader.getLevelsCount()-1)
 			throw new IllegalArgumentException("Level does not exist");
 		
@@ -41,14 +47,6 @@ public class BoardModel {
 					_storageVector.add(cell);
 			}
 		}
-		
-		
-	}
-	
-	private void loadNewLevel(int levelNumber){
-		//TODO: ariel
-		//I am pretty sure you can just write here the loading code already in the builder and have the 
-		//builder use this method
 	}
 	
 	
