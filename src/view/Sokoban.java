@@ -53,7 +53,7 @@ public class Sokoban extends JFrame{
 		_score = new JLabel(text + score);
 		
 		JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,CreateLevelPanel(),CreateRightPanel());
-		
+		add (upperWindow);
 
 		
 		pack();
