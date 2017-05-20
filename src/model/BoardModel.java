@@ -167,6 +167,11 @@ public class BoardModel {
 		return _levelGrid[nextX][nextY];
 	}
 	
+	//returns the number of levels in the file
+	public int GetNumberOfLevels (){
+		return _levelLoader.getLevelsCount();
+	}
+	
 	
 
 	
