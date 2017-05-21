@@ -40,25 +40,52 @@ public class BoardDraw {
 		_correctCrateLocation = new ImageIcon (this.getClass().getResource("/Crate_Yellow.png"));
 	}
 	
-	public JPanel DrawGameBoard (/*Cell [][] level*/){
-		//JLabel [][] labelArray = new JLabel[level.length][level[0].length];
-		JLabel [][] labelArray = new JLabel[2][2];
-		labelArray[0][0] = new JLabel(_characterIcon);
-		labelArray[0][1] = new JLabel(_floorIcon);
-		labelArray[1][0] = new JLabel(_floorIcon);
-		labelArray[1][1] = new JLabel(_wallIcon);
-
+	public JPanel DrawGameBoard (Cell [][] level){
+		JLabel [][] labelArray = CreateBoard(level);
+		JPanel jp = new JPanel(new GridLayout(level.length,level[0].length));
 		
-		
-		JPanel jp = new JPanel(new GridLayout(2,2));
-		
-		for (int i=0;i<2;i++){
-			for (int j=0;j<2;j++){
+		// insert the jlabel array into panel
+		for (int i=0;i<level.length;i++){
+			for (int j=0;j<level[0].length;j++){
 				jp.add(labelArray[i][j]);
 			}
 		}
 
-		
 		return jp;
+	}
+	
+	// create the Jlabel array according to board
+	private JLabel [][] CreateBoard(Cell [][] level){
+		JLabel [][] labelArray = new JLabel[level.length][level[0].length];
+		
+		for (int i=0;i<level.length;i++){
+			for (int j=0;j<level[0].length;j++){
+				//paint floor
+				if (level[i][j].isEmptyFloor()){
+					labelArray[i][j] = new JLabel(_floorIcon);
+				}
+				//paint correct box position
+				else if (level[i][j].hasBox()&level[i][j].isStorage()){
+					labelArray[i][j] = new JLabel(_correctCrateLocation);
+				}
+				//Paint box
+				else if (level[i][j].hasBox()){
+					labelArray[i][j] = new JLabel(_crateIcon);
+				}
+				// paint storage
+				else if (level[i][j].isStorage()){
+					labelArray[i][j] = new JLabel(_storageIcon);
+				}
+				// Paint Character
+				else if (level[i][j].hasPlayer()){
+					labelArray[i][j] = new JLabel(_characterIcon);
+				}
+				else{
+					labelArray[i][j] = new JLabel(_wallIcon);
+				}
+			}
+		}
+		
+		return labelArray;
 	}
 }

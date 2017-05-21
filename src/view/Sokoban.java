@@ -1,4 +1,8 @@
 package view;
+import controller.*;
+import levelLoader.*;
+import model.*;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -23,9 +27,10 @@ import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
 
 public class Sokoban extends JFrame{
 
-	private JList<String> _levelList;
+	private JList<String> _levelList; 
+	private ListListner _listListner; // contains list listner
 	private JScrollPane _scrolList;
-	private Vector<String> _levelNames;
+	private Vector<String> _levelNames; //list of level names
 
 	private JButton _resetButton;
 	private JLabel _score;
@@ -53,12 +58,28 @@ public class Sokoban extends JFrame{
 		score =0;
 		_score = new JLabel(_scoreText + score);
 		
+
+		// creates the split view of the upper window
 		JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,CreateLevelPanel(),CreateRightPanel());
-		//add (upperWindow);
 		
+		// set the initial level value to 0
+		_levelList.setSelectedIndex(0); 
 		
-		BoardDraw bd = new BoardDraw();
-		add(bd.DrawGameBoard());
+		// gets the new board after changing level
+		BoardModel currentBoard = _listListner.GetNewBoard();
+		
+		//TODO send board into key listner???
+		
+		_gameBoardDrawer = new BoardDraw();
+		
+		//creates a panel containg the visual presentaion of the board
+		JPanel lowerPanel = _gameBoardDrawer.DrawGameBoard(currentBoard.GetCellArray());
+		
+		//splits the frame into 3
+		JSplitPane fullWindow = new JSplitPane(JSplitPane.VERTICAL_SPLIT,upperWindow,lowerPanel);
+		
+		add (fullWindow);
+
 		
 		
 		pack();
@@ -73,6 +94,9 @@ public class Sokoban extends JFrame{
 		_levelList = new JList<String>(_levelNames);
 		_scrolList = new JScrollPane(_levelList);
 		_levelList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); /// enable selecting only one level
+		//create list listner
+		_listListner = new ListListner(_levelList);
+		_levelList.addListSelectionListener(_listListner); // create list listner
 		
 		levelPanel.add(_scrolList);	
 		
@@ -92,7 +116,8 @@ public class Sokoban extends JFrame{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Sokoban frame = new Sokoban(4);
+		
+		Sokoban frame = new Sokoban(4/*change to number of levels in text file*/);
 
 	}
 

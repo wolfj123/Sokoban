@@ -16,7 +16,7 @@ public class BoardModel {
 	}
 	
 	public BoardModel(int levelNumber){
-		this(levelNumber, "levels");
+		this(levelNumber, ( "levels.txt"));
 	}
 	
 	public BoardModel(int levelNumber, String levelsFile){
@@ -26,9 +26,7 @@ public class BoardModel {
 			e.printStackTrace();
 		}
 		
-		loadNewLevel(levelNumber);
-		
-		
+		loadNewLevel(levelNumber);	
 	}
 	
 	private void loadNewLevel(int levelNumber){
@@ -47,6 +45,11 @@ public class BoardModel {
 					_storageVector.add(cell);
 			}
 		}
+	}
+	
+	//get Cell array
+	public Cell[][] GetCellArray (){
+		return _levelGrid;
 	}
 	
 	
