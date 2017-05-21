@@ -56,9 +56,7 @@ public class BoardModel {
      * @return Cell[][] representing the new 
      * @throws UnsupportedOperationException if the move is illegal
      */
-	public boolean makeMove(Direction direction){
-		//TODO: NOT FINISHED!!
-		
+	public boolean makeMove(Direction direction){	
 		Cell player = getPlayerCell();
 		Cell nextCell = getNextCell(player, direction);
 		Cell nextNextCell = getNextCell(nextCell, direction);
@@ -81,7 +79,6 @@ public class BoardModel {
 		}
 		
 		return isLegal;
-		//return _levelGrid;
 	}
 	
 	
