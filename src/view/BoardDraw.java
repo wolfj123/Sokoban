@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.util.Vector;
 
@@ -42,9 +43,22 @@ public class BoardDraw {
 	public JPanel DrawGameBoard (/*Cell [][] level*/){
 		//JLabel [][] labelArray = new JLabel[level.length][level[0].length];
 		JLabel [][] labelArray = new JLabel[2][2];
-		JPanel jp = new JPanel();
+		labelArray[0][0] = new JLabel(_characterIcon);
+		labelArray[0][1] = new JLabel(_floorIcon);
+		labelArray[1][0] = new JLabel(_floorIcon);
+		labelArray[1][1] = new JLabel(_wallIcon);
+
 		
-		//jp.add(labelArray);
+		
+		JPanel jp = new JPanel(new GridLayout(2,2));
+		
+		for (int i=0;i<2;i++){
+			for (int j=0;j<2;j++){
+				jp.add(labelArray[i][j]);
+			}
+		}
+
+		
 		return jp;
 	}
 }
