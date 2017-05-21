@@ -31,7 +31,9 @@ public class Sokoban extends JFrame{
 	private JLabel _score;
 	private int score;
 	
-	private String text;
+	private String _scoreText;
+	
+	private BoardDraw _gameBoardDrawer;
 	
 	//constructor creates the window and layouts 
 	public Sokoban (int numberOfLevels){
@@ -40,7 +42,6 @@ public class Sokoban extends JFrame{
 		
 		//this.setResizable(false); 
 		
-		
 		_levelNames = new Vector<String>();
 		//create level names
 		for (int i=1;i<=numberOfLevels;i++){
@@ -48,13 +49,17 @@ public class Sokoban extends JFrame{
 		}
 		
 		_resetButton = new JButton("Reset Game");
-		text = "The Score is: ";
+		_scoreText = "The Score is: ";
 		score =0;
-		_score = new JLabel(text + score);
+		_score = new JLabel(_scoreText + score);
 		
 		JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,CreateLevelPanel(),CreateRightPanel());
-		add (upperWindow);
-
+		//add (upperWindow);
+		
+		
+		BoardDraw bd = new BoardDraw();
+		add(bd.DrawGameBoard());
+		
 		
 		pack();
 		setVisible(true);

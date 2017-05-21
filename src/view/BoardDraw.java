@@ -1,4 +1,5 @@
 package view;
+import levelLoader.Cell;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -30,16 +31,20 @@ public class BoardDraw {
 	private ImageIcon _correctCrateLocation;
 
 	public BoardDraw (){
-		_characterIcon = new ImageIcon("Character4.png");
-		_floorIcon = new ImageIcon ("Ground_Grass.png");
-		_crateIcon = new ImageIcon ("CrateDark_Black.png");
-		_storageIcon = new ImageIcon ("EndPoint_Black.png");
-		_wallIcon = new ImageIcon ("Wall_Gray.png");
-		_correctCrateLocation = new ImageIcon ("Crate_Yellow.png");
+		_characterIcon = new ImageIcon(this.getClass().getResource("/Character4.png"));
+		_floorIcon = new ImageIcon (this.getClass().getResource("/Ground_Grass.png"));
+		_crateIcon = new ImageIcon (this.getClass().getResource("/CrateDark_Black.png"));
+		_storageIcon = new ImageIcon (this.getClass().getResource("/EndPoint_Black.png"));
+		_wallIcon = new ImageIcon (this.getClass().getResource("/Wall_Gray.png"));
+		_correctCrateLocation = new ImageIcon (this.getClass().getResource("/Crate_Yellow.png"));
 	}
 	
-	public JPanel DrawGameBoard (){
+	public JPanel DrawGameBoard (/*Cell [][] level*/){
+		//JLabel [][] labelArray = new JLabel[level.length][level[0].length];
+		JLabel [][] labelArray = new JLabel[2][2];
+		JPanel jp = new JPanel();
 		
-		return null;
+		//jp.add(labelArray);
+		return jp;
 	}
 }
