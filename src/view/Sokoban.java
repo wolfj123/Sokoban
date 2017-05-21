@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -91,10 +92,15 @@ public class Sokoban extends JFrame{
 		return _score;
 	}
 	
+	//TODO: this needs to be actually tested eventually...
+	public void victory(){
+		JOptionPane.showMessageDialog(null, 
+				"You have won!"+"\n"+"Your score is :" + getScore());
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Sokoban frame = new Sokoban(4);
-
 	}
 
 }

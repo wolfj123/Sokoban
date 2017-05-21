@@ -50,12 +50,9 @@ public class ArrowController implements KeyListener{
 			_game.setScore(currentScore + 1);
 		}
 		
-		boolean victory = _board.checkVictory();
-		if(victory){
-			//TODO make player win	
+		if(_board.checkVictory()){
+			_game.victory();
 		}
-		
-		
 	}
 
 	@Override
