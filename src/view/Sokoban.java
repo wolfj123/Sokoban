@@ -28,8 +28,8 @@ public class Sokoban extends JFrame{
 	private Vector<String> _levelNames;
 
 	private JButton _resetButton;
-	private JLabel _score;
-	private int score;
+	private JLabel _scoreLabel;
+	private int _score;
 	
 	private String text;
 	
@@ -49,8 +49,8 @@ public class Sokoban extends JFrame{
 		
 		_resetButton = new JButton("Reset Game");
 		text = "The Score is: ";
-		score =0;
-		_score = new JLabel(text + score);
+		_score =0;
+		_scoreLabel = new JLabel(text + _score);
 		
 		JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,CreateLevelPanel(),CreateRightPanel());
 		add (upperWindow);
@@ -78,12 +78,18 @@ public class Sokoban extends JFrame{
 		
 		JPanel rightPanel = new JPanel(new FlowLayout());
 		rightPanel.add(_resetButton);
-		rightPanel.add(_score);
+		rightPanel.add(_scoreLabel);
 		return rightPanel;
 	}
 	
 	
-	// 
+	public void setScore(int score){
+		_score=score;
+	}
+	
+	public int getScore(){
+		return _score;
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
