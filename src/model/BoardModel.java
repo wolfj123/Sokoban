@@ -59,19 +59,11 @@ public class BoardModel {
      * @return Cell[][] representing the new 
      * @throws UnsupportedOperationException if the move is illegal
      */
-	public Cell[][] makeMove(Direction direction){
-		//TODO: NOT FINISHED!!
-		
+	public boolean makeMove(Direction direction){	
 		Cell player = getPlayerCell();
 		Cell nextCell = getNextCell(player, direction);
 		Cell nextNextCell = getNextCell(nextCell, direction);
-		
-		/*
-		if(!checkLegality(direction)){
-			throw new RuntimeException("Illegal move");
-			}*/
-		
-		
+			
 		boolean isLegal = false;
 
 		//move to next empty cell
@@ -89,12 +81,7 @@ public class BoardModel {
 			nextNextCell.set_hasBox(true);
 		}
 		
-		
-		if(!isLegal){
-			throw new UnsupportedOperationException("Illegal move!");
-		}
-		
-		return _levelGrid;
+		return isLegal;
 	}
 	
 	

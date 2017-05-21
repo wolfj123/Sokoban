@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -33,8 +34,8 @@ public class Sokoban extends JFrame{
 	private Vector<String> _levelNames; //list of level names
 
 	private JButton _resetButton;
-	private JLabel _score;
-	private int score;
+	private JLabel _scoreLabel;
+	private int _score;
 	
 	private String _scoreText;
 	
@@ -55,8 +56,8 @@ public class Sokoban extends JFrame{
 		
 		_resetButton = new JButton("Reset Game");
 		_scoreText = "The Score is: ";
-		score =0;
-		_score = new JLabel(_scoreText + score);
+		_score =0;
+		_scoreLabel = new JLabel(text + _score);
 		
 
 		// creates the split view of the upper window
@@ -107,18 +108,29 @@ public class Sokoban extends JFrame{
 		
 		JPanel rightPanel = new JPanel(new FlowLayout());
 		rightPanel.add(_resetButton);
-		rightPanel.add(_score);
+		rightPanel.add(_scoreLabel);
 		return rightPanel;
 	}
 	
 	
-	// 
+	public void setScore(int score){
+		_score=score;
+	}
+	
+	public int getScore(){
+		return _score;
+	}
+	
+	//TODO: this needs to be actually tested eventually...
+	public void victory(){
+		JOptionPane.showMessageDialog(null, 
+				"You have won!"+"\n"+"Your score is :" + getScore());
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		Sokoban frame = new Sokoban(4/*change to number of levels in text file*/);
-
 	}
 
 }

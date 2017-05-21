@@ -1,6 +1,7 @@
 package controller;
 
 import model.EnumDirection.Direction;
+import view.Sokoban;
 import model.BoardModel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -8,6 +9,12 @@ import java.awt.event.KeyListener;
 public class ArrowController implements KeyListener{
 
 	private BoardModel _board;
+	private Sokoban _game;
+	
+	public ArrowController(Sokoban game){
+		super();
+		_game = game;
+	}
 	
 	
 	@Override
@@ -30,35 +37,32 @@ public class ArrowController implements KeyListener{
 			direction = Direction.RIGHT;
 		}
 		
+		boolean madeMove = false;
+		
 		if(direction!=Direction.NONE){
-			
-			try{
-				_board.makeMove(direction);
-			}
-			catch(Exception ex){
-				//TODO: maybe indicate to user that the move is wrong with annoying sound?
-			}
+			madeMove = _board.makeMove(direction);
 		}
 		
 		// TODO View.drawBoard()
 		
-		boolean victory = _board.checkVictory();
-		if(victory){
-			//TODO make player win	
+		if(madeMove){
+			int currentScore = _game.getScore();
+			_game.setScore(currentScore + 1);
 		}
 		
+		if(_board.checkVictory()){
+			_game.victory();
+		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	
