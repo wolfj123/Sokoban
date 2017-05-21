@@ -57,7 +57,7 @@ public class Sokoban extends JFrame{
 		_resetButton = new JButton("Reset Game");
 		_scoreText = "The Score is: ";
 		_score =0;
-		_scoreLabel = new JLabel(text + _score);
+		_scoreLabel = new JLabel(_scoreText + _score);
 		
 
 		// creates the split view of the upper window
