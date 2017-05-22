@@ -51,6 +51,11 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
 		Direction direction = Direction.NONE; 
 		int key = e.getKeyCode();
 		
@@ -84,11 +89,6 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 		if(_board.checkVictory()){
 			_game.victory();
 		}
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override

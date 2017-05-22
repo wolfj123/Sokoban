@@ -76,7 +76,7 @@ public class Sokoban extends JFrame{
 		_levelList.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
 		_levelList.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "none");
 		
-		
+		_levelList.addKeyListener(_controller);
 		
 		//create list listener
 
