@@ -17,7 +17,7 @@ public class BoardModel {
 	}
 	
 	public BoardModel(int levelNumber){
-		this(levelNumber, ( "levels.txt"));
+		this(levelNumber, "levels.txt");
 	}
 	
 	public BoardModel(int levelNumber, String levelsFile){

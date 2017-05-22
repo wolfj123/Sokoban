@@ -59,7 +59,8 @@ public class BoardDraw {
 		JLabel [][] labelArray = new JLabel[level.length][level[0].length];
 		
 		for (int i=0;i<level.length;i++){
-			for (int j=0;j<level[0].length;j++){
+			for (int j=0;j<level[i].length;j++){
+				Cell c = level[i][j];
 				//paint floor
 				if (level[i][j].isEmptyFloor()){
 					labelArray[i][j] = new JLabel(_floorIcon);

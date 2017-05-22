@@ -29,60 +29,69 @@ import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
 public class Sokoban extends JFrame{
 
 	private JList<String> _levelList; 
-	private ListListner _listListner; // contains list listner
+	private ControllerClass _controller;
 	private JScrollPane _scrolList;
 	private Vector<String> _levelNames; //list of level names
-
 	private JButton _resetButton;
 	private JLabel _scoreLabel;
 	private int _score;
-	
 	private String _scoreText;
-	
 	private BoardDraw _gameBoardDrawer;
+	private JPanel _lowerPanel;
+	private JSplitPane _fullWindow;
+	private JSplitPane _upperWindow;
+
 	
 	//constructor creates the window and layouts 
-	public Sokoban (int numberOfLevels){
+	public Sokoban (){
 		super ("Sokoban");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		//this.setResizable(false); 
+		this.setResizable(false); 
+		_controller = new ControllerClass(this);
+
 		
-		_levelNames = new Vector<String>();
-		//create level names
-		for (int i=1;i<=numberOfLevels;i++){
-			_levelNames.add("Level " + i);
-		}
-		
+		// score label initialization 
 		_resetButton = new JButton("Reset Game");
 		_scoreText = "The Score is: ";
 		_score =0;
 		_scoreLabel = new JLabel(_scoreText + _score);
 		
+		//initialize JList and level list names
+		
+		_levelNames = new Vector<String>();
+		
+		int numberOfLevels = _controller.GetNumberOfLevels();
+		//create level names
+		for (int i=1;i<=numberOfLevels;i++){
+			_levelNames.add("Level " + i);
+		}
+		
+		_levelList = new JList<String>(_levelNames);
+		_levelList.setSelectedIndex(0); // set the initial level value to 0
+		_controller.UpdateJList(_levelList);
+		
+		//create list listner
+		_levelList.addListSelectionListener(_controller); // create list listner
 
 		// creates the split view of the upper window
-		JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,CreateLevelPanel(),CreateRightPanel());
+		 _upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,CreateLevelPanel(),CreateRightPanel());
+
 		
-		// set the initial level value to 0
-		_levelList.setSelectedIndex(0); 
-		
-		// gets the new board after changing level
-		BoardModel currentBoard = _listListner.GetNewBoard();
+
 		
 		//TODO send board into key listner???
 		
+		// create board visual represenation 
 		_gameBoardDrawer = new BoardDraw();
-		
 		//creates a panel containg the visual presentaion of the board
-		JPanel lowerPanel = _gameBoardDrawer.DrawGameBoard(currentBoard.GetCellArray());
+		
+		 _lowerPanel = _gameBoardDrawer.DrawGameBoard(_controller.GetBoard());
 		
 		//splits the frame into 3
-		JSplitPane fullWindow = new JSplitPane(JSplitPane.VERTICAL_SPLIT,upperWindow,lowerPanel);
+		 _fullWindow = new JSplitPane(JSplitPane.VERTICAL_SPLIT,_upperWindow,_lowerPanel);
 		
-		add (fullWindow);
-
-		
-		
+		add (_fullWindow);
 		pack();
 		setVisible(true);
 	}
@@ -90,14 +99,10 @@ public class Sokoban extends JFrame{
 	// level selector panel
 	private JPanel CreateLevelPanel(){	
 		JPanel levelPanel = new JPanel();
-		
-		//create scroll list and scroll pane
-		_levelList = new JList<String>(_levelNames);
+
 		_scrolList = new JScrollPane(_levelList);
 		_levelList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); /// enable selecting only one level
-		//create list listner
-		_listListner = new ListListner(_levelList);
-		_levelList.addListSelectionListener(_listListner); // create list listner
+
 		
 		levelPanel.add(_scrolList);	
 		
@@ -127,10 +132,17 @@ public class Sokoban extends JFrame{
 				"You have won!"+"\n"+"Your score is :" + getScore());
 	}
 	
+	// paint the new board 
+	public void PaintNewBoard (){
+		_lowerPanel = _gameBoardDrawer.DrawGameBoard(_controller.GetBoard());
+		_fullWindow.setBottomComponent(_lowerPanel);
+		
+	}
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		Sokoban frame = new Sokoban(4/*change to number of levels in text file*/);
+		Sokoban frame = new Sokoban();
 	}
 
 }
