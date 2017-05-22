@@ -10,7 +10,7 @@ public class LevelController {
 	}
 	
 	public int GetNumberOfLevels (){
-		return _boardControl.GetNumberOfLevels();
+		return _boardControl.getNumberOfLevels();
 	}
 
 }

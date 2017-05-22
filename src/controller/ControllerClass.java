@@ -33,7 +33,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 	
 	//get the game board
 	public Cell[][] GetBoard (){
-		return _board.GetCellArray();
+		return _board.getCellArray();
 	}
 	
 	@Override
@@ -42,9 +42,9 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 			_board = new BoardModel(_levelList.getSelectedIndex());
 			boardChanged(); 
 		}
-
 	}
 	
+	//updates gui board
 	private void boardChanged (){
 		_game.PaintNewBoard();
 	}
@@ -75,11 +75,10 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 			madeMove = _board.makeMove(direction);
 		}
 		
-		// TODO View.drawBoard()
-		
 		if(madeMove){
 			int currentScore = _game.getScore();
 			_game.setScore(currentScore + 1);
+			boardChanged();
 		}
 		
 		if(_board.checkVictory()){
@@ -98,7 +97,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 	}
 	
 	public int GetNumberOfLevels (){
-		return _board.GetNumberOfLevels();
+		return _board.getNumberOfLevels();
 	}
 
 
