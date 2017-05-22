@@ -49,7 +49,7 @@ public class BoardModel {
 	}
 	
 	//get Cell array
-	public Cell[][] GetCellArray (){
+	public Cell[][] getCellArray (){
 		return _levelGrid;
 	}
 	
@@ -159,7 +159,7 @@ public class BoardModel {
 	}
 	
 	//returns the number of levels in the file
-	public int GetNumberOfLevels (){
+	public int getNumberOfLevels (){
 		return _levelLoader.getLevelsCount();
 	}
 	
@@ -169,7 +169,7 @@ public class BoardModel {
 		// TODO Auto-generated method stub
 		
 		BoardModel model = new BoardModel(0);
-		System.out.print(model.GetCellArray().toString());
+		System.out.print(model.getCellArray().toString());
 	}
 	
 	

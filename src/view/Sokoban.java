@@ -74,6 +74,9 @@ public class Sokoban extends JFrame{
 		//create list listner
 		_levelList.addListSelectionListener(_controller); // create list listner
 
+
+		//TODO - cancel list key press
+		//TODO - make keylistner listen to frame this.addKeyListener(_controller);
 		// creates the split view of the upper window
 		 _upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,CreateLevelPanel(),CreateRightPanel());
 
