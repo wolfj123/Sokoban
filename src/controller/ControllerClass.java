@@ -1,4 +1,5 @@
 package controller;
+import levelLoader.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -17,18 +18,35 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 	private Sokoban _game;
 	private JList<String> _levelList;
 	
-	public ControllerClass (Sokoban game, JList<String> levelList){
+	public ControllerClass (Sokoban game){
 		super();
 		_game = game;
-		_levelList = levelList;
+		_levelList = null;
 		_board = new BoardModel();
+	}
+	
+	// updates the level list
+	public void UpdateJList (JList<String> levelList){
+		_levelList = levelList;
+	}
+	
+	
+	//get the game board
+	public Cell[][] GetBoard (){
+		return _board.GetCellArray();
 	}
 	
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		if (!e.getValueIsAdjusting()) {
 			_board = new BoardModel(_levelList.getSelectedIndex());
+			boardChanged(); 
 		}
+
+	}
+	
+	private void boardChanged (){
+		_game.PaintNewBoard();
 	}
 	
 	@Override
@@ -80,7 +98,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 	}
 	
 	public int GetNumberOfLevels (){
-		return _boardControl.GetNumberOfLevels();
+		return _board.GetNumberOfLevels();
 	}
 
 
