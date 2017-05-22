@@ -63,15 +63,19 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 		
 		case KeyEvent.VK_UP:
 			direction = Direction.UP;
-		
+			break;
+			
 		case KeyEvent.VK_DOWN:
 			direction = Direction.DOWN;
+			break;
 			
 		case KeyEvent.VK_LEFT:
 			direction = Direction.LEFT;
+			break;
 			
 		case KeyEvent.VK_RIGHT:
 			direction = Direction.RIGHT;
+			break;
 		}
 		
 		boolean madeMove = false;
