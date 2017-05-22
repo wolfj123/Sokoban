@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import levelLoader.*;
 import model.EnumDirection.Direction;
+import view.Sokoban;
 
 public class BoardModel {
 	
@@ -164,6 +165,12 @@ public class BoardModel {
 	
 	
 
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		BoardModel model = new BoardModel(0);
+		System.out.print(model.GetCellArray().toString());
+	}
 	
 	
 }
