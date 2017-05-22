@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
@@ -61,7 +62,7 @@ public class Sokoban extends JFrame{
 		
 		_levelNames = new Vector<String>();
 		
-		int numberOfLevels = _controller.GetNumberOfLevels();
+		int numberOfLevels = _controller.getNumberOfLevels();
 		//create level names
 		for (int i=1;i<=numberOfLevels;i++){
 			_levelNames.add("Level " + i);
@@ -71,14 +72,21 @@ public class Sokoban extends JFrame{
 		_levelList.setSelectedIndex(0); // set the initial level value to 0
 		_controller.UpdateJList(_levelList);
 		
-		//create list listner
+		//disable the arrows on the list
+		_levelList.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
+		_levelList.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "none");
+		
+		
+		
+		//create list listener
+
 		_levelList.addListSelectionListener(_controller); // create list listner
 
 
 		//TODO - cancel list key press
-		//TODO - make keylistner listen to frame this.addKeyListener(_controller);
+		//TODO - make listener listen to frame this.addKeyListener(_controller);
 		// creates the split view of the upper window
-		 _upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,CreateLevelPanel(),CreateRightPanel());
+		 _upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,createLevelPanel(),createRightPanel());
 
 		
 
@@ -89,7 +97,7 @@ public class Sokoban extends JFrame{
 		_gameBoardDrawer = new BoardDraw();
 		//creates a panel containg the visual presentaion of the board
 		
-		 _lowerPanel = _gameBoardDrawer.DrawGameBoard(_controller.GetBoard());
+		 _lowerPanel = _gameBoardDrawer.DrawGameBoard(_controller.getBoard());
 		
 		//splits the frame into 3
 		 _fullWindow = new JSplitPane(JSplitPane.VERTICAL_SPLIT,_upperWindow,_lowerPanel);
@@ -100,7 +108,7 @@ public class Sokoban extends JFrame{
 	}
 	
 	// level selector panel
-	private JPanel CreateLevelPanel(){	
+	private JPanel createLevelPanel(){	
 		JPanel levelPanel = new JPanel();
 
 		_scrolList = new JScrollPane(_levelList);
@@ -112,7 +120,7 @@ public class Sokoban extends JFrame{
 		return levelPanel;
 	}
 	
-	private JPanel CreateRightPanel (){
+	private JPanel createRightPanel (){
 		
 		JPanel rightPanel = new JPanel(new FlowLayout());
 		rightPanel.add(_resetButton);
@@ -136,8 +144,8 @@ public class Sokoban extends JFrame{
 	}
 	
 	// paint the new board 
-	public void PaintNewBoard (){
-		_lowerPanel = _gameBoardDrawer.DrawGameBoard(_controller.GetBoard());
+	public void paintNewBoard (){
+		_lowerPanel = _gameBoardDrawer.DrawGameBoard(_controller.getBoard());
 		_fullWindow.setBottomComponent(_lowerPanel);
 		
 	}

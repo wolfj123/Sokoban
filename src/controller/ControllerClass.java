@@ -32,7 +32,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 	
 	
 	//get the game board
-	public Cell[][] GetBoard (){
+	public Cell[][] getBoard (){
 		return _board.getCellArray();
 	}
 	
@@ -46,7 +46,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 	
 	//updates gui board
 	private void boardChanged (){
-		_game.PaintNewBoard();
+		_game.paintNewBoard();
 	}
 	
 	@Override
@@ -96,7 +96,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 		// TODO Auto-generated method stub
 	}
 	
-	public int GetNumberOfLevels (){
+	public int getNumberOfLevels (){
 		return _board.getNumberOfLevels();
 	}
 
