@@ -84,7 +84,7 @@ public class Sokoban extends JFrame{
 		resetButton.setFocusable(false);
 	
 		
-		// score label initialization 
+		//score label initialization 
 		_scoreText = "The Score is: ";
 		_score =0;
 		_scoreLabel = new JLabel(_scoreText + _score);
