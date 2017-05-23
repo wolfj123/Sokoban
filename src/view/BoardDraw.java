@@ -62,24 +62,24 @@ public class BoardDraw {
 			for (int j=0;j<level[i].length;j++){
 				Cell c = level[i][j];
 				//paint floor
-				if (level[i][j].isEmptyFloor()){
-					labelArray[i][j] = new JLabel(_floorIcon);
+				// Paint Character
+				if (level[i][j].hasPlayer()){
+					labelArray[i][j] = new JLabel(_characterIcon);
 				}
 				//paint correct box position
 				else if (level[i][j].hasBox()&level[i][j].isStorage()){
 					labelArray[i][j] = new JLabel(_correctCrateLocation);
 				}
-				//Paint box
-				else if (level[i][j].hasBox()){
-					labelArray[i][j] = new JLabel(_crateIcon);
-				}
 				// paint storage
 				else if (level[i][j].isStorage()){
 					labelArray[i][j] = new JLabel(_storageIcon);
 				}
-				// Paint Character
-				else if (level[i][j].hasPlayer()){
-					labelArray[i][j] = new JLabel(_characterIcon);
+				else if (level[i][j].isEmptyFloor()){
+					labelArray[i][j] = new JLabel(_floorIcon);
+				}
+				//Paint box
+				else if (level[i][j].hasBox()){
+					labelArray[i][j] = new JLabel(_crateIcon);
 				}
 				else{
 					labelArray[i][j] = new JLabel(_wallIcon);
