@@ -33,7 +33,7 @@ public class Sokoban extends JFrame{
 	private ControllerClass _controller;
 	//private JScrollPane _scrolList;
 	//private Vector<String> _levelNames; //list of level names
-	private JButton _resetButton;
+	//private JButton _resetButton;
 	private JLabel _scoreLabel;
 	private int _score;
 	private String _scoreText;
@@ -52,11 +52,7 @@ public class Sokoban extends JFrame{
 		_controller = new ControllerClass(this);
 
 		
-		// score label initialization 
-		_resetButton = new JButton("Reset Game");
-		_scoreText = "The Score is: ";
-		_score =0;
-		_scoreLabel = new JLabel(_scoreText + _score);
+	
 		
 		//initialize JList and level list names
 		
@@ -81,22 +77,30 @@ public class Sokoban extends JFrame{
 		//create list listener
 
 		_levelList.addListSelectionListener(_controller); // create list listner
-
-
-		//TODO - cancel list key press
-		//TODO - make listener listen to frame this.addKeyListener(_controller);
+		
+		//reset button initialize
+		JButton resetButton = new JButton("Reset Game");
+		resetButton.addActionListener(_controller);
+		resetButton.setFocusable(false);
+	
+		
+		// score label initialization 
+		_scoreText = "The Score is: ";
+		_score =0;
+		_scoreLabel = new JLabel(_scoreText + _score);
+		
 		// creates the split view of the upper window
-		 JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,createLevelPanel(),createRightPanel());
+		 JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,createLevelPanel(),createRightPanel(resetButton));
 
 		
 
+
 		
-		//TODO send board into key listner???
 		
 		// create board visual represenation 
 		BoardDraw gameBoardDrawer = new BoardDraw();
-		//creates a panel containg the visual presentaion of the board
 		
+		//creates a panel containg the visual presentaion of the board
 		 JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(_controller.getBoard());
 		
 		//splits the frame into 3
@@ -120,10 +124,10 @@ public class Sokoban extends JFrame{
 		return levelPanel;
 	}
 	
-	private JPanel createRightPanel (){
+	private JPanel createRightPanel (JButton resetButton){
 		
 		JPanel rightPanel = new JPanel(new FlowLayout());
-		rightPanel.add(_resetButton);
+		rightPanel.add(resetButton);
 		rightPanel.add(_scoreLabel);
 		return rightPanel;
 	}

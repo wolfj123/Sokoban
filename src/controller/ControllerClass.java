@@ -1,6 +1,8 @@
 package controller;
 import levelLoader.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -12,7 +14,7 @@ import model.BoardModel;
 import model.EnumDirection.Direction;
 import view.Sokoban;
 
-public class ControllerClass implements ListSelectionListener, KeyListener {
+public class ControllerClass implements ListSelectionListener, KeyListener, ActionListener {
 	
 	private BoardModel _board;
 	private Sokoban _game;
@@ -36,6 +38,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 		return _board.getCellArray();
 	}
 	
+	//List Listner
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		if (!e.getValueIsAdjusting()) {
@@ -46,6 +49,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 	
 	//updates gui board
 	private void boardChanged (){
+		//TODO paint new score and update score
 		_game.paintNewBoard();
 	}
 	
@@ -102,6 +106,13 @@ public class ControllerClass implements ListSelectionListener, KeyListener {
 	
 	public int getNumberOfLevels (){
 		return _board.getNumberOfLevels();
+	}
+	
+	//reset button actionListner
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		_board = new BoardModel(_levelList.getSelectedIndex());
+		boardChanged();
 	}
 
 
