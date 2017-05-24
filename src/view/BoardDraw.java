@@ -41,8 +41,10 @@ public class BoardDraw {
 	}
 	
 	public JPanel DrawGameBoard (Cell [][] level){
+		level = transpose(level);
 		JLabel [][] labelArray = CreateBoard(level);
 		JPanel jp = new JPanel(new GridLayout(level.length,level[0].length));
+		
 		
 		// insert the jlabel array into panel
 		for (int i=0;i<level.length;i++){
@@ -56,11 +58,12 @@ public class BoardDraw {
 	
 	// create the Jlabel array according to board
 	private JLabel [][] CreateBoard(Cell [][] level){
+		
 		JLabel [][] labelArray = new JLabel[level.length][level[0].length];
 		
 		for (int i=0;i<level.length;i++){
 			for (int j=0;j<level[i].length;j++){
-				Cell c = level[i][j];
+				//Cell c = level[i][j];
 				//paint floor
 				// Paint Character
 				if (level[i][j].hasPlayer()){
@@ -89,4 +92,15 @@ public class BoardDraw {
 		
 		return labelArray;
 	}
+	
+	private Cell[][] transpose (Cell[][] orig){
+		Cell[][] transposed = new Cell[orig[0].length][orig.length];
+		for (int i=0;i<orig[0].length;i++){
+			for (int j=0;j<orig.length;j++){
+				transposed[i][j]=orig[j][i];
+			}
+		}
+		return transposed;
+	}
 }
+// TODO update score label

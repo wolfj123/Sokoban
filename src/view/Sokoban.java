@@ -152,7 +152,7 @@ public class Sokoban extends JFrame{
 		BoardDraw gameBoardDrawer = new BoardDraw();
 		JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(_controller.getBoard());
 		_fullWindow.setBottomComponent(lowerPanel);
-		
+		this.pack();
 	}
 	
 	
