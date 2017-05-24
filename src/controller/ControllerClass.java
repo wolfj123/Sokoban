@@ -43,6 +43,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 	public void valueChanged(ListSelectionEvent e) {
 		if (!e.getValueIsAdjusting()) {
 			_board = new BoardModel(_levelList.getSelectedIndex());
+			_game.setScore(0);
 			boardChanged(); 
 		}
 	}
@@ -112,6 +113,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		_board = new BoardModel(_levelList.getSelectedIndex());
+		_game.setScore(0);
 		boardChanged();
 	}
 
