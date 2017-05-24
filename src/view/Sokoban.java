@@ -1,8 +1,8 @@
 package view;
+
 import controller.*;
 import levelLoader.*;
 import model.*;
-
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -10,7 +10,6 @@ import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.Vector;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
