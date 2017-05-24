@@ -144,7 +144,8 @@ public class Sokoban extends JFrame{
 	//TODO: this needs to be actually tested eventually...
 	public void victory(){
 		JOptionPane.showMessageDialog(null, 
-				"You have won!"+"\n"+"Your score is :" + getScore());
+				"You have won!"+"\n"+"Your score is :" + getScore() 
+				+ "\n" + "Please select a new level from the list");
 	}
 	
 	// paint the new board 
