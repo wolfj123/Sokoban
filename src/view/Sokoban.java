@@ -32,14 +32,14 @@ public class Sokoban extends JFrame{
 	private ControllerClass _controller;
 	//private JScrollPane _scrolList;
 	//private Vector<String> _levelNames; //list of level names
-	private JButton _resetButton;
+	//private JButton _resetButton;
 	private JLabel _scoreLabel;
 	private int _score;
 	private String _scoreText;
 	//private BoardDraw _gameBoardDrawer;
 	//private JPanel _lowerPanel;
 	private JSplitPane _fullWindow;
-	private JSplitPane _upperWindow;
+	//private JSplitPane _upperWindow;
 
 	
 	//constructor creates the window and layouts 
@@ -78,9 +78,9 @@ public class Sokoban extends JFrame{
 		_levelList.addListSelectionListener(_controller); // create list listner
 		
 		//reset button initialize
-		_resetButton = new JButton("Reset Game");
-		_resetButton.addActionListener(_controller);
-		_resetButton.setFocusable(false);
+		JButton resetButton = new JButton("Reset Game");
+		resetButton.addActionListener(_controller);
+		resetButton.setFocusable(false);
 	
 		
 		//score label initialization 
@@ -89,7 +89,7 @@ public class Sokoban extends JFrame{
 		_scoreLabel = new JLabel(_scoreText + _score);
 		
 		// creates the split view of the upper window
-		 _upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,createLevelPanel(),createRightPanel());
+		 JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,createLevelPanel(),createRightPanel(resetButton));
 
 		
 
@@ -103,7 +103,7 @@ public class Sokoban extends JFrame{
 		 JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(_controller.getBoard());
 		
 		//splits the frame into 3
-		 _fullWindow = new JSplitPane(JSplitPane.VERTICAL_SPLIT,_upperWindow,lowerPanel);
+		 _fullWindow = new JSplitPane(JSplitPane.VERTICAL_SPLIT,upperWindow,lowerPanel);
 		
 		add (_fullWindow);
 		pack();
@@ -123,10 +123,10 @@ public class Sokoban extends JFrame{
 		return levelPanel;
 	}
 	
-	private JPanel createRightPanel (){
+	private JPanel createRightPanel (JButton resetButton){
 		
 		JPanel rightPanel = new JPanel(new FlowLayout());
-		rightPanel.add(_resetButton);
+		rightPanel.add(resetButton);
 		rightPanel.add(_scoreLabel);
 		return rightPanel;
 	}
@@ -134,6 +134,7 @@ public class Sokoban extends JFrame{
 	
 	public void setScore(int score){
 		_score=score;
+		_scoreLabel.setText(_scoreText+_score);
 	}
 	
 	public int getScore(){
@@ -151,7 +152,6 @@ public class Sokoban extends JFrame{
 		BoardDraw gameBoardDrawer = new BoardDraw();
 		JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(_controller.getBoard());
 		_fullWindow.setBottomComponent(lowerPanel);
-		System.out.println(_scoreLabel.toString());
 		this.pack();
 	}
 	
