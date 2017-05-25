@@ -173,9 +173,14 @@ public class BoardModel {
 		return _levelLoader.getLevelsCount();
 	}
 	
-	private void undo(){
-		if(!_undoStack.isEmpty())
+	public boolean undo(){
+		if(!_undoStack.isEmpty()){
 			_levelGrid = _undoStack.pop();
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 }
