@@ -8,6 +8,7 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.util.Vector;
 import javax.swing.BoxLayout;
@@ -40,6 +41,8 @@ public class Sokoban extends JFrame{
 	//private BoardDraw _gameBoardDrawer;
 	//private JPanel _lowerPanel;
 	private JSplitPane _fullWindow;
+	private UndoController _undoController;
+	private BoardModel _board;
 	//private JSplitPane _upperWindow;
 
 	
@@ -47,11 +50,12 @@ public class Sokoban extends JFrame{
 	public Sokoban (){
 		super ("Sokoban");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setResizable(false);
 		
-		this.setResizable(false); 
-		_controller = new ControllerClass(this);
+		_board= new BoardModel();
+		_controller = new ControllerClass(this,_board);
 
-		
+
 	
 		
 		//initialize JList and level list names
@@ -127,20 +131,27 @@ public class Sokoban extends JFrame{
 	private JSplitPane createRightPanel (){
 		
 		JPanel buttonsPanel = new JPanel(new FlowLayout());
+		// create reset button
 		JButton resetButton = new JButton("Reset Game");
 		resetButton.addActionListener(_controller);
 		resetButton.setFocusable(false);
 		buttonsPanel.add(resetButton);
+		// create undo button
+		_undoController = new UndoController(this,_board);
 		JButton undoButton = new JButton("Undo");
-		undoButton.addActionListener(_controller);
 		undoButton.setFocusable(false);
+		undoButton.addActionListener(_undoController);
 		buttonsPanel.add(undoButton);
 		
-		JPanel labelsPanel = new JPanel (new FlowLayout());
-		labelsPanel.add(_scoreLabel);
+		//create instructions label
 		JLabel instructuions = new JLabel("wolf write here");
+
+		// add to Jpanel
+		JPanel labelsPanel = new JPanel (new GridLayout(2, 1));
+		labelsPanel.add(_scoreLabel);
 		labelsPanel.add(instructuions);
 		
+		// add to split pane
 		JSplitPane rightPanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT,buttonsPanel,labelsPanel);
 
 		return rightPanel;

@@ -20,12 +20,14 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 	private Sokoban _game;
 	private JList<String> _levelList;
 	
-	public ControllerClass (Sokoban game){
+	public ControllerClass (Sokoban game,BoardModel board){
 		super();
 		_game = game;
 		_levelList = null;
-		_board = new BoardModel();
+		_board = board;
 	}
+	
+
 	
 	// updates the level list
 	public void UpdateJList (JList<String> levelList){
