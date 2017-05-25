@@ -1,7 +1,8 @@
 package model;
-import java.io.IOException;
-import java.util.Vector;
 
+import java.io.IOException;
+import java.util.Stack;
+import java.util.Vector;
 import levelLoader.*;
 import model.EnumDirection.Direction;
 import view.Sokoban;
@@ -11,6 +12,7 @@ public class BoardModel {
 	private LevelLoader _levelLoader = new LevelLoader();
 	private Cell[][] _levelGrid;
 	private Vector<Cell> _storageVector;
+	private Stack<Cell[][]> _undoStack;
 	
 	public BoardModel(){
 		this(0);
@@ -37,7 +39,7 @@ public class BoardModel {
 		//TODO: maybe throw an exception if the width is 0 ? it might mess up the getNextCell
 		_levelGrid = _levelLoader.get(levelNumber);
 		_storageVector = new Vector<>();
-		
+		_undoStack = new Stack<Cell[][]>();
 		
 		//initialize the storage list
 		for(Cell[] cellColumn: _levelGrid){
@@ -73,6 +75,9 @@ public class BoardModel {
 		//move to next empty cell
 		if(nextCell.isEmptyFloor()){
 			isLegal = true;
+			Cell[][] previousBoard = _levelGrid.clone();
+			_undoStack.push(previousBoard);
+			
 			player.set_hasPlayer(false);
 			nextCell.set_hasPlayer(true);
 		}
@@ -80,11 +85,13 @@ public class BoardModel {
 		//move player and box to next cells
 		if(nextNextCell!=null && nextCell.hasBox() & nextNextCell.isEmptyFloor()){
 			isLegal = true;
+			Cell[][] previousBoard = _levelGrid.clone();
+			_undoStack.push(previousBoard);
+			
 			player.set_hasPlayer(false);
 			nextCell.set_hasPlayer(true); nextCell.set_hasBox(false);
 			nextNextCell.set_hasBox(true);
 		}
-		
 		return isLegal;
 	}
 	
@@ -166,14 +173,9 @@ public class BoardModel {
 		return _levelLoader.getLevelsCount();
 	}
 	
-	
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		BoardModel model = new BoardModel(0);
-		System.out.print(model.getCellArray().toString());
+	private void undo(){
+		if(!_undoStack.isEmpty())
+			_levelGrid = _undoStack.pop();
 	}
-	
 	
 }
