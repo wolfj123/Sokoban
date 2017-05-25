@@ -52,8 +52,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 	
 	//updates gui board
 	private void boardChanged (){
-		//TODO paint new score and update score
-		_game.paintNewBoard();
+		_game.paintNewBoard(getBoard());
 	}
 	
 	@Override
