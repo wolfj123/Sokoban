@@ -72,7 +72,10 @@ public class BoardModel {
      * @return Cell[][] representing the new 
      * @throws UnsupportedOperationException if the move is illegal
      */
-	public boolean makeMove(Direction direction){	
+	public boolean makeMove(Direction direction){
+		
+		if(checkVictory()) return false;
+		
 		Cell player = getPlayerCell();
 		Cell nextCell = getNextCell(player, direction);
 		Cell nextNextCell = getNextCell(nextCell, direction);
