@@ -20,6 +20,7 @@ public class UndoController implements ActionListener{
 		if(_board.undo()){
 			int currentScore = _game.getScore();
 			_game.setScore(currentScore-1);
+			_game.paintNewBoard();
 		}
 	}
 	
