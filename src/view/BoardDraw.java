@@ -82,8 +82,8 @@ public class BoardDraw {
 				else if (level[i][j].isStorage()){
 					labelArray[i][j] = new JLabel(_storageIcon);
 				}
+				//floor square, no painting
 				else if (level[i][j].isEmptyFloor()){
-					//labelArray[i][j] = new JLabel(_floorIcon);
 					labelArray[i][j] = new JLabel();
 				}
 				//Paint box

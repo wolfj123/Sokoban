@@ -36,9 +36,7 @@ public class BoardModel {
 		if(levelNumber<0 | levelNumber>_levelLoader.getLevelsCount()-1)
 			throw new IllegalArgumentException("Level does not exist");
 		
-		//TODO: maybe throw an exception if the width is 0 ? it might mess up the getNextCell
 		_levelGrid = _levelLoader.get(levelNumber);
-//		_levelGrid = transpose(_levelGrid);
 		_storageVector = new Vector<>();
 		_undoStack = new Stack<Cell[][]>();
 		
@@ -51,16 +49,6 @@ public class BoardModel {
 		}
 	}
 	
-	
-	private Cell[][] transpose (Cell[][] orig){
-		Cell[][] transposed = new Cell[orig[0].length][orig.length];
-		for (int i=0;i<orig[0].length;i++){
-			for (int j=0;j<orig.length;j++){
-				transposed[i][j]=orig[j][i];
-			}
-		}
-		return transposed;
-	}
 
 	//get Cell array
 	public Cell[][] getCellArray (){
