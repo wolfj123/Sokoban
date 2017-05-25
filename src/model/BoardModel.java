@@ -36,6 +36,7 @@ public class BoardModel {
 		
 		//TODO: maybe throw an exception if the width is 0 ? it might mess up the getNextCell
 		_levelGrid = _levelLoader.get(levelNumber);
+//		_levelGrid = transpose(_levelGrid);
 		_storageVector = new Vector<>();
 		
 		
@@ -48,6 +49,17 @@ public class BoardModel {
 		}
 	}
 	
+	
+	private Cell[][] transpose (Cell[][] orig){
+		Cell[][] transposed = new Cell[orig[0].length][orig.length];
+		for (int i=0;i<orig[0].length;i++){
+			for (int j=0;j<orig.length;j++){
+				transposed[i][j]=orig[j][i];
+			}
+		}
+		return transposed;
+	}
+
 	//get Cell array
 	public Cell[][] getCellArray (){
 		return _levelGrid;
@@ -166,7 +178,7 @@ public class BoardModel {
 	
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub????????
 		
 		BoardModel model = new BoardModel(0);
 		System.out.print(model.getCellArray().toString());
