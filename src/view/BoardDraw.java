@@ -1,5 +1,7 @@
 package view;
 import levelLoader.Cell;
+
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -43,7 +45,10 @@ public class BoardDraw {
 	public JPanel DrawGameBoard (Cell [][] level){
 		level = transpose(level);
 		JLabel [][] labelArray = CreateBoard(level);
-		JPanel jp = new JPanel(new GridLayout(level.length,level[0].length));
+		JPanel jp = new JPanel();
+		Color backgroundColor = new Color (0,170,0);
+		jp.setBackground(backgroundColor);
+		jp.setLayout(new GridLayout(level.length,level[0].length));
 		
 		
 		// insert the jlabel array into panel
@@ -78,7 +83,8 @@ public class BoardDraw {
 					labelArray[i][j] = new JLabel(_storageIcon);
 				}
 				else if (level[i][j].isEmptyFloor()){
-					labelArray[i][j] = new JLabel(_floorIcon);
+					//labelArray[i][j] = new JLabel(_floorIcon);
+					labelArray[i][j] = new JLabel();
 				}
 				//Paint box
 				else if (level[i][j].hasBox()){

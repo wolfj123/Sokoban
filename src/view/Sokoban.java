@@ -22,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpringLayout;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
 
@@ -77,10 +78,10 @@ public class Sokoban extends JFrame{
 
 		_levelList.addListSelectionListener(_controller); // create list listner
 		
-		//reset button initialize
+		/*//reset button initialize
 		JButton resetButton = new JButton("Reset Game");
 		resetButton.addActionListener(_controller);
-		resetButton.setFocusable(false);
+		resetButton.setFocusable(false);*/
 	
 		
 		//score label initialization 
@@ -89,7 +90,7 @@ public class Sokoban extends JFrame{
 		_scoreLabel = new JLabel(_scoreText + _score);
 		
 		// creates the split view of the upper window
-		 JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,createLevelPanel(),createRightPanel(resetButton));
+		 JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,createLevelPanel(),createRightPanel());
 
 		
 
@@ -123,11 +124,25 @@ public class Sokoban extends JFrame{
 		return levelPanel;
 	}
 	
-	private JPanel createRightPanel (JButton resetButton){
+	private JSplitPane createRightPanel (){
 		
-		JPanel rightPanel = new JPanel(new FlowLayout());
-		rightPanel.add(resetButton);
-		rightPanel.add(_scoreLabel);
+		JPanel buttonsPanel = new JPanel(new FlowLayout());
+		JButton resetButton = new JButton("Reset Game");
+		resetButton.addActionListener(_controller);
+		resetButton.setFocusable(false);
+		buttonsPanel.add(resetButton);
+		JButton undoButton = new JButton("Undo");
+		undoButton.addActionListener(_controller);
+		undoButton.setFocusable(false);
+		buttonsPanel.add(undoButton);
+		
+		JPanel labelsPanel = new JPanel (new FlowLayout());
+		labelsPanel.add(_scoreLabel);
+		JLabel instructuions = new JLabel("wolf write here");
+		labelsPanel.add(instructuions);
+		
+		JSplitPane rightPanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT,buttonsPanel,labelsPanel);
+
 		return rightPanel;
 	}
 	
