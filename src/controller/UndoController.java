@@ -10,6 +10,11 @@ public class UndoController implements ActionListener{
 	private BoardModel _board;
 	private Sokoban _game;
 	
+	public UndoController(Sokoban game, BoardModel board){
+		_game = game;
+		_board = board;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(_board.undo()){
