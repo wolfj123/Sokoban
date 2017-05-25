@@ -59,8 +59,7 @@ public class BoardModel {
     /**
      * Loads all the levels to the internal levels buffer
      * @param direction - the direction the player wishes to go
-     * @return Cell[][] representing the new 
-     * @throws UnsupportedOperationException if the move is illegal
+     * @return boolean representing whether a move was made
      */
 	public boolean makeMove(Direction direction){
 		
@@ -93,26 +92,6 @@ public class BoardModel {
 			nextNextCell.set_hasBox(true);
 		}
 		return isLegal;
-	}
-	
-	
-	private boolean checkLegality(Direction direction){
-		Cell player = getPlayerCell();
-		Cell nextCell = getNextCell(player, direction);
-		Cell nextNextCell = getNextCell(nextCell, direction);
-		
-		if(nextCell==null)
-			return false;
-		
-		if(nextCell.isEmptyFloor())
-			return true;
-		
-		if(nextNextCell!=null && nextCell.hasBox() & nextNextCell.isEmptyFloor())
-			return true;
-		
-		
-		return false;
-
 	}
 	
 	public boolean checkVictory(){

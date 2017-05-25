@@ -109,5 +109,3 @@ public class BoardDraw {
 		return transposed;
 	}
 }
-
-// TODO update score label

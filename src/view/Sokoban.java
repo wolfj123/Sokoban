@@ -1,18 +1,11 @@
 package view;
 
 import controller.*;
-//import levelLoader.*;
+import levelLoader.Cell;
 import model.*;
-//import java.awt.Component;
-//import java.awt.Container;
 import java.awt.FlowLayout;
-//import java.awt.Frame;
-//import java.awt.Graphics;
 import java.awt.GridLayout;
-//import java.awt.Insets;
 import java.util.Vector;
-//import javax.swing.BoxLayout;
-//import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,9 +16,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
-//import javax.swing.SpringLayout;
-//import javax.swing.border.Border;
-//import javax.swing.plaf.basic.BasicBorders.SplitPaneBorder;
 
 
 public class Sokoban extends JFrame{
@@ -81,10 +71,10 @@ public class Sokoban extends JFrame{
 		// creates the split view of the upper window
 		 JSplitPane upperWindow = new JSplitPane (JSplitPane.HORIZONTAL_SPLIT,createLevelPanel(),createRightPanel());
 
-		// create board visual represenation 
+		// create board visual representation 
 		BoardDraw gameBoardDrawer = new BoardDraw();
 		
-		//creates a panel containg the visual presentaion of the board
+		//creates a panel containing the visual presentation of the board
 		 JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(_controller.getBoard());
 		
 		//splits the frame into 3
@@ -155,10 +145,10 @@ public class Sokoban extends JFrame{
 	}
 	
 	// paint the new board 
-	public void paintNewBoard (){
+	public void paintNewBoard (Cell[][] cellArray){
 		// create the panel of the board
 		BoardDraw gameBoardDrawer = new BoardDraw(); 
-		JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(_controller.getBoard());
+		JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(cellArray);
 		// update JFrame
 		_fullWindow.setBottomComponent(lowerPanel);
 		this.pack();
