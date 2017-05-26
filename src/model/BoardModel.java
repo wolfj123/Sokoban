@@ -165,4 +165,23 @@ public class BoardModel {
 		}
 	}
 	
+	public static Cell[][] cloneCellArray(Cell[][] arr){
+		if(arr == null)
+			return null;
+	
+		//TODO exception handling if the array is empty or contains nulls
+		int n = arr.length;
+		int m = arr[0].length;
+		Cell[][] output = new Cell[n][m];
+		
+		for(int i=0; i<m; i++){
+			for(int j=0; j<m; j++){
+				output[i][j] = arr[i][j].clone();
+			}
+		}
+		return output;
+		
+	}
+	
+	
 }
