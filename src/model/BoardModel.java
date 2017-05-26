@@ -37,10 +37,13 @@ public class BoardModel {
 			throw new IllegalArgumentException("Level does not exist");
 		
 		_levelGrid = _levelLoader.get(levelNumber);
-		_storageVector = new Vector<>();
+		storageVectorInit();
 		_undoStack = new Stack<Cell[][]>();
-		
-		//initialize the storage list
+	}
+	
+	//initialize the storage list
+	private void storageVectorInit(){
+		_storageVector = new Vector<>();
 		for(Cell[] cellColumn: _levelGrid){
 			for (Cell cell : cellColumn){
 				if(cell.isStorage())

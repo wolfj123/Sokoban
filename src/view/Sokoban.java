@@ -75,7 +75,7 @@ public class Sokoban extends JFrame{
 		BoardDraw gameBoardDrawer = new BoardDraw();
 		
 		//creates a panel containing the visual presentation of the board
-		 JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(_controller.getBoard());
+		 JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(_board.getCellArray());
 		
 		//splits the frame into 3
 		 _fullWindow = new JSplitPane(JSplitPane.VERTICAL_SPLIT,upperWindow,lowerPanel);
