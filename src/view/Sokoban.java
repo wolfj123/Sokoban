@@ -137,6 +137,13 @@ public class Sokoban extends JFrame{
 		return _score;
 	}
 	
+	public BoardModel getBoard(){
+		return _board;
+	}
+	
+	public void setBoard(BoardModel board){
+		_board = board;
+	}
 	
 	public void victory(){
 		JOptionPane.showMessageDialog(null, 
