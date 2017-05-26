@@ -77,7 +77,8 @@ public class BoardModel {
 		//move to next empty cell
 		if(nextCell.isEmptyFloor()){
 			isLegal = true;
-			Cell[][] previousBoard = _levelGrid.clone();
+			//Cell[][] previousBoard = _levelGrid.clone();
+			Cell[][] previousBoard = cloneCellArray(_levelGrid);
 			_undoStack.push(previousBoard);
 			
 			player.set_hasPlayer(false);
@@ -87,7 +88,8 @@ public class BoardModel {
 		//move player and box to next cells
 		if(nextNextCell!=null && nextCell.hasBox() & nextNextCell.isEmptyFloor()){
 			isLegal = true;
-			Cell[][] previousBoard = _levelGrid.clone();
+			//Cell[][] previousBoard = _levelGrid.clone();
+			Cell[][] previousBoard = cloneCellArray(_levelGrid);
 			_undoStack.push(previousBoard);
 			
 			player.set_hasPlayer(false);
@@ -174,13 +176,12 @@ public class BoardModel {
 		int m = arr[0].length;
 		Cell[][] output = new Cell[n][m];
 		
-		for(int i=0; i<m; i++){
+		for(int i=0; i<n; i++){
 			for(int j=0; j<m; j++){
 				output[i][j] = arr[i][j].clone();
 			}
 		}
 		return output;
-		
 	}
 	
 	
