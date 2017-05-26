@@ -27,13 +27,6 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 		_board = board;
 	}
 	
-
-	
-	// updates the level list
-	public void updateJList (JList<String> levelList){
-		_levelList = levelList;
-	}
-	
 	public void setBoard(BoardModel board){
 		_board = board;
 	}
@@ -43,7 +36,11 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 		return _board.getCellArray();
 	}
 	
-	//List Listner
+	public int getNumberOfLevels (){
+		return _board.getNumberOfLevels();
+	}
+	
+	//List Listener
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		if (!e.getValueIsAdjusting()) {
@@ -53,11 +50,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 			boardChanged();
 		}
 	}
-	
-	//updates gui board
-	private void boardChanged (){
-		_game.paintNewBoard(getBoard());
-	}
+
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -110,10 +103,6 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 		// TODO Auto-generated method stub
 	}
 	
-	public int getNumberOfLevels (){
-		return _board.getNumberOfLevels();
-	}
-	
 	//reset button actionListner
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -121,6 +110,17 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 		_game.setBoard(_board);
 		_game.setScore(0);
 		boardChanged();
+	}
+	
+	
+	// updates the level list
+	public void updateJList (JList<String> levelList){
+		_levelList = levelList;
+	}
+	
+	//updates gui board
+	private void boardChanged (){
+		_game.paintNewBoard(getBoard());
 	}
 
 

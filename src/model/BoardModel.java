@@ -5,7 +5,6 @@ import java.util.Stack;
 import java.util.Vector;
 import levelLoader.*;
 import model.EnumDirection.Direction;
-import view.Sokoban;
 
 public class BoardModel {
 	
@@ -32,32 +31,16 @@ public class BoardModel {
 		loadNewLevel(levelNumber);	
 	}
 	
-	private void loadNewLevel(int levelNumber){
-		if(levelNumber<0 | levelNumber>_levelLoader.getLevelsCount()-1)
-			throw new IllegalArgumentException("Level does not exist");
-		
-		_levelGrid = _levelLoader.get(levelNumber);
-		storageVectorInit();
-		_undoStack = new Stack<Cell[][]>();
-	}
-	
-	//initialize the storage list
-	private void storageVectorInit(){
-		_storageVector = new Vector<>();
-		for(Cell[] cellColumn: _levelGrid){
-			for (Cell cell : cellColumn){
-				if(cell.isStorage())
-					_storageVector.add(cell);
-			}
-		}
-	}
-	
-
 	//get Cell array
 	public Cell[][] getCellArray (){
 		return _levelGrid;
 	}
 	
+	
+	//returns the number of levels in the file
+	public int getNumberOfLevels (){
+		return _levelLoader.getLevelsCount();
+	}
 	
     /**
      * Loads all the levels to the internal levels buffer
@@ -107,56 +90,6 @@ public class BoardModel {
 		return true;
 	}
 	
-	private Cell getPlayerCell(){
-		for(Cell[] cellColumn: _levelGrid){
-			for (Cell cell : cellColumn){
-				if(cell.hasPlayer())
-					return cell;
-			}
-		}
-		return null;
-	}
-		
-	
-	//return next Cell based on direction
-	private Cell getNextCell(Cell cell, Direction direction){
-		int x = cell._x;
-		int y = cell._y;
-		
-		int nextX = x;
-		int nextY = y;
-		
-		switch(direction){
-		
-		case UP:
-			nextY -= 1;
-			break;
-		
-		case DOWN:
-			nextY += 1;
-			break;
-		
-		case LEFT:
-			nextX -= 1;
-			break;
-		
-		case RIGHT:
-			nextX += 1;
-			break;
-		}	
-
-		if(nextX<0 | nextX>=_levelGrid.length |
-				nextY<0 | nextY>=_levelGrid[0].length)
-			return null;
-		
-		return _levelGrid[nextX][nextY];
-	}
-	
-	//returns the number of levels in the file
-	public int getNumberOfLevels (){
-		return _levelLoader.getLevelsCount();
-	}
-	
 	public boolean undo(){
 		if(!_undoStack.isEmpty()){
 			_levelGrid = _undoStack.pop();
@@ -170,8 +103,7 @@ public class BoardModel {
 	public static Cell[][] cloneCellArray(Cell[][] arr){
 		if(arr == null)
 			return null;
-	
-		//TODO exception handling if the array is empty or contains nulls
+
 		int n = arr.length;
 		int m = arr[0].length;
 		Cell[][] output = new Cell[n][m];
@@ -184,5 +116,68 @@ public class BoardModel {
 		return output;
 	}
 	
+	private void loadNewLevel(int levelNumber){
+		if(levelNumber<0 | levelNumber>_levelLoader.getLevelsCount()-1)
+			throw new IllegalArgumentException("Level does not exist");
+		
+		_levelGrid = _levelLoader.get(levelNumber);
+		storageVectorInit();
+		_undoStack = new Stack<Cell[][]>();
+	}
+	
+	//initialize the storage list
+		private void storageVectorInit(){
+			_storageVector = new Vector<>();
+			for(Cell[] cellColumn: _levelGrid){
+				for (Cell cell : cellColumn){
+					if(cell.isStorage())
+						_storageVector.add(cell);
+				}
+			}
+		}
+	
+	//return next Cell based on direction
+		private Cell getNextCell(Cell cell, Direction direction){
+			int x = cell._x;
+			int y = cell._y;
+			
+			int nextX = x;
+			int nextY = y;
+			
+			switch(direction){
+			
+			case UP:
+				nextY -= 1;
+				break;
+			
+			case DOWN:
+				nextY += 1;
+				break;
+			
+			case LEFT:
+				nextX -= 1;
+				break;
+			
+			case RIGHT:
+				nextX += 1;
+				break;
+			}	
+
+			if(nextX<0 | nextX>=_levelGrid.length |
+					nextY<0 | nextY>=_levelGrid[0].length)
+				return null;
+			
+			return _levelGrid[nextX][nextY];
+		}
+	
+	private Cell getPlayerCell(){
+		for(Cell[] cellColumn: _levelGrid){
+			for (Cell cell : cellColumn){
+				if(cell.hasPlayer())
+					return cell;
+			}
+		}
+		return null;
+	}
 	
 }

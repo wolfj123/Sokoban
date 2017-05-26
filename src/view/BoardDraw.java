@@ -42,16 +42,16 @@ public class BoardDraw {
 		_correctCrateLocation = new ImageIcon (this.getClass().getResource("/Crate_Yellow.png"));
 	}
 	
-	public JPanel DrawGameBoard (Cell [][] level){
+	public JPanel drawGameBoard (Cell [][] level){
 		level = transpose(level);
-		JLabel [][] labelArray = CreateBoard(level);
+		JLabel [][] labelArray = createBoard(level);
 		JPanel jp = new JPanel();
 		Color backgroundColor = new Color (0,170,0);
 		jp.setBackground(backgroundColor);
 		jp.setLayout(new GridLayout(level.length,level[0].length));
 		
 		
-		// insert the jlabel array into panel
+		// insert the Jlabel array into panel
 		for (int i=0;i<level.length;i++){
 			for (int j=0;j<level[0].length;j++){
 				jp.add(labelArray[i][j]);
@@ -62,9 +62,9 @@ public class BoardDraw {
 	}
 	
 	// create the Jlabel array according to board
-	private JLabel [][] CreateBoard(Cell [][] level){
+	private JLabel[][] createBoard(Cell[][] level){
 		
-		JLabel [][] labelArray = new JLabel[level.length][level[0].length];
+		JLabel[][] labelArray = new JLabel[level.length][level[0].length];
 		
 		for (int i=0;i<level.length;i++){
 			for (int j=0;j<level[i].length;j++){

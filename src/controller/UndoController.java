@@ -15,10 +15,6 @@ public class UndoController implements ActionListener{
 		_board = board;
 	}
 	
-	public void setBoard(BoardModel board){
-		_board = board;
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(_board.undo()){
@@ -28,4 +24,7 @@ public class UndoController implements ActionListener{
 		}
 	}
 	
+	public void setBoard(BoardModel board){
+		_board = board;
+	}
 }

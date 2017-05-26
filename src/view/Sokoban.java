@@ -61,7 +61,7 @@ public class Sokoban extends JFrame{
 		_levelList.addKeyListener(_controller);
 		
 		//create list listener
-		_levelList.addListSelectionListener(_controller); // create list listner
+		_levelList.addListSelectionListener(_controller); // create list listener
 		
 		
 		//score label initialization 
@@ -76,7 +76,7 @@ public class Sokoban extends JFrame{
 		BoardDraw gameBoardDrawer = new BoardDraw();
 		
 		//creates a panel containing the visual presentation of the board
-		 JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(_board.getCellArray());
+		 JPanel lowerPanel = gameBoardDrawer.drawGameBoard(_board.getCellArray());
 		
 		//splits the frame into 3
 		 _fullWindow = new JSplitPane(JSplitPane.VERTICAL_SPLIT,upperWindow,lowerPanel);
@@ -86,56 +86,18 @@ public class Sokoban extends JFrame{
 		setVisible(true);
 	}
 	
-	// level selector panel
-	private JPanel createLevelPanel(){	
-		JPanel levelPanel = new JPanel();
-
-		JScrollPane scrolList = new JScrollPane(_levelList);
-		_levelList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); /// enable selecting only one level
-
-		
-		levelPanel.add(scrolList);	
-		
-		return levelPanel;
-	}
 	
-	private JSplitPane createRightPanel (){
-		
-		JPanel buttonsPanel = new JPanel(new FlowLayout());
-		// create reset button
-		JButton resetButton = new JButton("Reset Game");
-		resetButton.addActionListener(_controller);
-		resetButton.setFocusable(false);
-		buttonsPanel.add(resetButton);
-		// create undo button
-		_undoController = new UndoController(this,_board);
-		JButton undoButton = new JButton("Undo");
-		undoButton.setFocusable(false);
-		undoButton.addActionListener(_undoController);
-		buttonsPanel.add(undoButton);
-		
-		//create instructions label
-		JLabel instructuions = new JLabel("wolf write here");
-
-		// add to Jpanel
-		JPanel labelsPanel = new JPanel (new GridLayout(2, 1));
-		labelsPanel.add(_scoreLabel);
-		labelsPanel.add(instructuions);
-		
-		// add to split pane
-		JSplitPane rightPanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT,buttonsPanel,labelsPanel);
-
-		return rightPanel;
-	}
-	
-	
-	public void setScore(int score){
-		_score=score;
-		_scoreLabel.setText(_scoreText+_score);
+	public static void main(String[] args) {
+		Sokoban frame = new Sokoban();
 	}
 	
 	public int getScore(){
 		return _score;
+	}
+	
+	public void setScore(int score){
+		_score=score;
+		_scoreLabel.setText(_scoreText+_score);
 	}
 	
 	public BoardModel getBoard(){
@@ -158,15 +120,53 @@ public class Sokoban extends JFrame{
 	public void paintNewBoard (Cell[][] cellArray){
 		// create the panel of the board
 		BoardDraw gameBoardDrawer = new BoardDraw(); 
-		JPanel lowerPanel = gameBoardDrawer.DrawGameBoard(cellArray);
+		JPanel lowerPanel = gameBoardDrawer.drawGameBoard(cellArray);
 		// update JFrame
 		_fullWindow.setBottomComponent(lowerPanel);
 		this.pack();
 	}
 	
-	
-	public static void main(String[] args) {
-		Sokoban frame = new Sokoban();
-	}
+	// level selector panel
+		private JPanel createLevelPanel(){	
+			JPanel levelPanel = new JPanel();
+			JScrollPane scrolList = new JScrollPane(_levelList);
+			_levelList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); /// enable selecting only one level
+			levelPanel.add(scrolList);	
+			
+			return levelPanel;
+		}
+		
+		private JSplitPane createRightPanel (){
+			
+			JPanel buttonsPanel = new JPanel(new FlowLayout());
+			// create reset button
+			JButton resetButton = new JButton("Reset Game");
+			resetButton.addActionListener(_controller);
+			resetButton.setFocusable(false);
+			buttonsPanel.add(resetButton);
+			// create undo button
+			_undoController = new UndoController(this,_board);
+			JButton undoButton = new JButton("Undo");
+			undoButton.setFocusable(false);
+			undoButton.addActionListener(_undoController);
+			buttonsPanel.add(undoButton);
+			
+			//create instructions label
+			JLabel instructuions = new JLabel("<html>Controls:<br>"
+					+ "Use the Arrow keys to control the worker<br>"
+					+ "Use Control+Up Arrow/Down Arrow to change the levels<br>"
+					+ "You can reset the game using the Reset button<br>"
+					+ "You can undo your moves using the Undo button</html>");
+
+			// add to Jpanel
+			JPanel labelsPanel = new JPanel (new GridLayout(2, 1));
+			labelsPanel.add(_scoreLabel);
+			labelsPanel.add(instructuions);
+			
+			// add to split pane
+			JSplitPane rightPanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT,buttonsPanel,labelsPanel);
+
+			return rightPanel;
+		}
 
 }
