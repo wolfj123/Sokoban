@@ -21,14 +21,15 @@ import javax.swing.ListSelectionModel;
 public class Sokoban extends JFrame{
 
 	private JList<String> _levelList; 
+	private BoardModel _board;
+	
 	private ControllerClass _controller;
+	private UndoController _undoController;
+	
 	private JLabel _scoreLabel;
 	private int _score;
 	private String _scoreText;
 	private JSplitPane _fullWindow;
-	private UndoController _undoController;
-	private BoardModel _board;
-
 
 	
 	//constructor creates the window and layouts 
@@ -51,7 +52,7 @@ public class Sokoban extends JFrame{
 		// create level Jlist and scroll pane
 		_levelList = new JList<String>(levelNames);
 		_levelList.setSelectedIndex(0); // set the initial level value to 0
-		_controller.UpdateJList(_levelList);
+		_controller.updateJList(_levelList);
 		
 		//disable the arrows on the list
 		_levelList.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
@@ -143,6 +144,8 @@ public class Sokoban extends JFrame{
 	
 	public void setBoard(BoardModel board){
 		_board = board;
+		_undoController.setBoard(board);
+		_controller.setBoard(board);
 	}
 	
 	public void victory(){

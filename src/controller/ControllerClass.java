@@ -30,10 +30,13 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 
 	
 	// updates the level list
-	public void UpdateJList (JList<String> levelList){
+	public void updateJList (JList<String> levelList){
 		_levelList = levelList;
 	}
 	
+	public void setBoard(BoardModel board){
+		_board = board;
+	}
 	
 	//get the game board
 	public Cell[][] getBoard (){
@@ -47,7 +50,7 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 			_board = new BoardModel(_levelList.getSelectedIndex());
 			_game.setBoard(_board);
 			_game.setScore(0);
-			boardChanged(); 
+			boardChanged();
 		}
 	}
 	
