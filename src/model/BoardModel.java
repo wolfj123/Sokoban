@@ -93,6 +93,7 @@ public class BoardModel {
 	public boolean undo(){
 		if(!_undoStack.isEmpty()){
 			_levelGrid = _undoStack.pop();
+			storageVectorInit();
 			return true;
 		}
 		else{
