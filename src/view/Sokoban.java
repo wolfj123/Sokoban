@@ -23,7 +23,7 @@ public class Sokoban extends JFrame{
 	private JList<String> _levelList; 
 	private BoardModel _board;
 	
-	private ControllerClass _controller;
+	private MainController _controller;
 	private UndoController _undoController;
 	
 	private JLabel _scoreLabel;
@@ -39,7 +39,7 @@ public class Sokoban extends JFrame{
 		this.setResizable(false);
 		
 		_board= new BoardModel();
-		_controller = new ControllerClass(this,_board);
+		_controller = new MainController(this,_board);
 
 		//initialize JList and level list names
 		Vector<String >levelNames = new Vector<String>();

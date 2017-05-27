@@ -15,13 +15,13 @@ import model.BoardModel;
 import model.EnumDirection.Direction;
 import view.Sokoban;
 
-public class ControllerClass implements ListSelectionListener, KeyListener, ActionListener {
+public class MainController implements ListSelectionListener, KeyListener, ActionListener {
 	
 	private BoardModel _board;
 	private Sokoban _game;
 	private JList<String> _levelList;
 	
-	public ControllerClass (Sokoban game,BoardModel board){
+	public MainController (Sokoban game,BoardModel board){
 		super();
 		_game = game;
 		_levelList = null;
