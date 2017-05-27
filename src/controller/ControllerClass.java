@@ -51,12 +51,6 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 		}
 	}
 
-	
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
-
 	@Override
 	public void keyPressed(KeyEvent e) {
 		Direction direction = Direction.NONE; 
@@ -97,11 +91,6 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 			_game.victory();
 		}
 	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
 	
 	//reset button actionListner
 	@Override
@@ -123,5 +112,14 @@ public class ControllerClass implements ListSelectionListener, KeyListener, Acti
 		_game.paintNewBoard(getBoard());
 	}
 
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
 
 }

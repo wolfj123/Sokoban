@@ -154,7 +154,7 @@ public class Sokoban extends JFrame{
 			//create instructions label
 			JLabel instructuions = new JLabel("<html>Controls:<br>"
 					+ "Use the Arrow keys to control the worker<br>"
-					+ "Use Control+Up Arrow/Down Arrow to change the levels<br>"
+					+ "Use Control+Up Arrow/Down Arrow to change the level mid-game<br>"
 					+ "You can reset the game using the Reset button<br>"
 					+ "You can undo your moves using the Undo button</html>");
 
